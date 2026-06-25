@@ -3,12 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import StepsForm from '../components/StepsForm.astro';
 
-const title = "Toiture en Lauze Calcaire Traditionnelle en Isère (38) | Guide Rénovation";
-const description = "Restauration et prix des toitures historiques en lauze calcaire dans les villages traditionnels du Dauphiné et de l'Isère.";
+const title = "Lauze Traditionnelle en Isère (38) : Restauration de Patrimoine Alpin";
+const description = "Le guide complet de la lauze calcaire en Isère. Techniques de pose d'art, poids de charge charpente, prix moyen et subventions régionales.";
 
 const breadcrumbItems = [
   { label: "Accueil", href: "/" },
-  { label: "Lauze Traditionnelle Dauphinoise" }
+  { label: "Restauration Lauze Calcaire" }
 ];
 ---
 
@@ -19,62 +19,95 @@ const breadcrumbItems = [
     <div class="container">
       <div class="two-column-layout" style="align-items: start; gap: 40px;">
         <!-- Left: Technical Content -->
-        <article style="display: flex; flex-direction: column; gap: 30px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
+        <article style="display: flex; flex-direction: column; gap: 35px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
           <header style="display: flex; flex-direction: column; gap: 15px;">
             <span style="font-family: var(--font-mono); font-size: 13px; color: var(--secondary); font-weight: 700;">
-              🏛️ PATRIMOINE ARCHITECTURAL ALPIN
+              🏛️ PRÉSERVATION DU PATRIMOINE HISTORIQUE DU DAUPHINÉ
             </span>
             <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin: 0; line-height: 1.25;">
-              La Lauze Calcaire Dauphinoise : Restauration et Prix de Pose
+              Restauration de Lauze Calcaire en Isère : Savoir-faire &amp; Techniques
             </h1>
             <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; font-style: italic; margin: 0; padding-left: 15px; border-left: 4px solid var(--secondary);">
-              Les toitures en lauzes calcaires constituent l'emblème historique des villages et hameaux dauphinois de l'Isère. Ce savoir-faire rare de couvreur-lauzier est préservé par des artisans locaux spécialisés.
+              La couverture en lauzes calcaires est l'un des emblèmes majeurs des villages de l'Isère, notamment sur le plateau du Vercors et dans les massifs de la Chartreuse et de l'Oisans.
             </p>
           </header>
 
           <div style="border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm);">
             <img 
               src="/images/hero-toiture-isere.png" 
-              alt="Détail d'une toiture traditionnelle en lauze calcaire dauphinoise" 
+              alt="Détail d'une toiture en lauzes calcaires traditionnelles dans le Vercors" 
               style="width: 100%; height: 350px; object-fit: cover;" 
             />
           </div>
 
           <div class="rich-content">
-            <h2>1. Qu'est-ce que la lauze calcaire traditionnelle ?</h2>
+            <h2>1. La nature géologique de la lauze en Isère</h2>
             <p>
-              La <strong>lauze</strong> est une dalle de pierre calcaire ou schisteuse extraite de carrières locales. Traditionnellement, les lauzes dauphinoises proviennent de sédiments calcaires du Grésivaudan, de la Chartreuse ou de l'Oisans.
+              Le terme « lauze » (ou lausa en arpitan) ne désigne pas un minéral précis, mais des dalles de pierre brute extraites de gisements sédimentaires ou métamorphiques locaux. En Isère (38), la nature géologique de la pierre varie d'un massif à l'autre, dictant les formes de la couverture :
             </p>
-            <p>
-              Contrairement à l'ardoise qui est fine et calibrée, la lauze est une pierre lourde (jusqu'à 150 à 250 kg par m²), d'épaisseur variable (entre 2 et 5 cm) et posée selon des techniques ancestrales d'empilage et de calage mécanique sur une charpente robuste en châtaignier ou en chêne.
-            </p>
-
-            <h2>2. La technique de pose et de restauration</h2>
-            <p>
-              La pose d'une couverture en lauzes calcaires est un travail d'orfèvre qui requiert patience et précision :
-            </p>
+            
             <ul>
-              <li><strong>Le tri des pierres :</strong> Les lauzes les plus grandes et lourdes sont positionnées en bas (à l'égout du toit) et les plus petites en haut (vers le faîtage).</li>
-              <li><strong>Le calage :</strong> Chaque pierre est posée avec un recouvrement partiel et calée mécaniquement pour assurer l'écoulement des eaux pluviales sans infiltration, même lors des orages cévenols.</li>
-              <li><strong>La charpente renforcée :</strong> En raison de la charge considérable de la lauze (jusqu'à 2,5 tonnes pour 10 m²), la charpente en bois de pays doit être dimensionnée en conséquence, avec des pannes de forte section.</li>
+              <li><strong>La lauze calcaire des Préalpes (Vercors, Chartreuse) :</strong> De couleur gris clair à dorée, elle provient de bancs de calcaire urgonien ou sénonien. Ces dalles épaisses (de 3 à 6 cm) se débitent naturellement en feuillets plans sous l'effet du gel en carrière. Elles caractérisent les toitures des fermes du Vercors dotées de pignons en gradins (les redents ou « pas de moineau ») recouverts de dalles de lauzes pour protéger les murs en maçonnerie de terre ou de pierre des infiltrations.</li>
+              <li><strong>La lauze schisteuse (Oisans, Belledonne) :</strong> Dans les massifs cristallins alpins, la pierre utilisée est d'origine métamorphique (phyllade ou schiste ardoisier). Plus fine (de 1,5 à 3 cm d'épaisseur), de couleur gris foncé à bleutée, elle se pose de manière similaire à l'ardoise lourde sur un liteautage bois renforcé.</li>
             </ul>
 
-            <h2>3. Quels sont les tarifs pour refaire une toiture en lauze ?</h2>
+            <h2>2. Conception de la charpente : Gérer le poids colossal de la pierre</h2>
             <p>
-              En raison de la rareté de la pierre de carrière et du temps de main d'œuvre très élevé (comptez environ 1 à 2 m² posés par jour et par artisan), la lauze est le matériau de couverture le plus cher du marché :
+              Le poids de la lauze calcaire constitue une contrainte structurelle majeure. C'est de loin le matériau de couverture le plus lourd du bâtiment :
+            </p>
+
+            <div style="background: var(--bg); padding: 20px; border-radius: var(--radius-sm); border-left: 4px solid var(--secondary); margin: 25px 0;">
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 14.5px; line-height: 1.8;">
+                <li>⚖️ <strong>Poids mort moyen :</strong> 200 à 350 kg par m² de couverture (contre 45 kg pour la tuile et 30 kg pour l'ardoise).</li>
+                <li>❄️ <strong>Surcharge neige C2 :</strong> 100 à 250 kg/m² supplémentaires selon l'altitude (zone C2).</li>
+                <li>🏗️ <strong>Charge cumulée de calcul :</strong> Jusqu'à 500 ou 600 kg/m² sur les fermes principales.</li>
+              </ul>
+            </div>
+
+            <p>
+              Une telle charge interdit l'utilisation de structures légères ou de charpentes modernes sous-dimensionnées. La charpente d'une toiture en lauze doit être conçue par un compagnon charpentier selon des exigences techniques strictes :
             </p>
             <ul>
-              <li><strong>Prix moyen de pose :</strong> Prévoyez entre <strong>200 € et 350 € le m² TTC</strong> (fourniture de pierres neuves ou de réemploi et main d'œuvre incluses).</li>
-              <li><strong>Entretien préventif :</strong> Un examen visuel tous les 10 ans permet de remplacer les lauzes cassées ou glissées par le gel et de pérenniser la charpente pour plus d'un siècle.</li>
+              <li><strong>Essences de bois denses :</strong> Utilisation de bois de cœur de pays, principalement du chêne pour les pièces maîtresses (pannes sablières, poinçons, arbalétriers) et du mélèze de haute montagne ou du sapin sec classé C24 ou GL24 pour les chevrons.</li>
+              <li><strong>Sections surdimensionnées :</strong> Les chevrons et pannes intermédiaires ont des dimensions accrues (sections courantes de 12x18 cm pour les chevrons).</li>
+              <li><strong>Entraxe de chevrons réduit :</strong> L'écartement entre deux chevrons est limité à moins de 30 cm de vide (contre 60 cm en plaine) pour éviter la flexion locale des voliges.</li>
+              <li><strong>Voligeage continu épais :</strong> Les dalles de pierre reposent sur un platelage continu en planches de sapin d'au moins 27 à 35 mm d'épaisseur.</li>
             </ul>
 
-            <blockquote>
-              <p><strong>Subventions du patrimoine :</strong> Dans certaines communes protégées de l'Isère, le Conseil Départemental ou les fondations pour le patrimoine subventionnent les projets de restauration à hauteur de 20% à 40% des travaux de couverture en lauzes.</p>
-            </blockquote>
+            <h2>3. Le savoir-faire du Lauzier : Une technique de pose d'art</h2>
+            <p>
+              La restauration d'un toit en lauze est un travail artisanal d'art de très longue haleine. L'avancement moyen d'un maître lauzier est de seulement **1,5 à 3 m² de toiture posés par jour et par homme**. Le protocole de pose se déroule en plusieurs étapes clés :
+            </p>
+            
+            <ol>
+              <li><strong>Le tri minutieux :</strong> Les lauzes livrées en vrac sur le chantier doivent être triées une à une par épaisseur et par taille. Les lauzes les plus épaisses et lourdes (les « doubles ») sont réservées pour l'égout (le bas de pente) pour asseoir la structure. Les lauzes plus fines et petites sont posées au fur et à mesure que l'on progresse vers le faîtage.</li>
+              <li><strong>La pose à sec (sans mortier) :</strong> Les lauzes sont posées par recouvrement horizontal en s'appuyant les unes sur les autres, avec une pente minimale importante (généralement supérieure à 45°) pour assurer l'étanchéité et l'évacuation rapide de l'eau. Chaque dalle est calée individuellement avec de petites pierres plates pour éviter tout balancement ou instabilité.</li>
+              <li><strong>La fixation mécanique :</strong> Si les anciens utilisaient des chevilles en bois de mélèze ou de genévrier traversant un trou foré dans la lauze, les lauziers modernes utilisent aujourd'hui des pitons et des chevilles en acier inoxydable ou en cuivre pour ancrer solidement les dalles de rives et de faîtage face aux rafales de vent de tempête.</li>
+            </ol>
+
+            <h2>4. Budgets et subventions régionales en Isère</h2>
+            <p>
+              Le coût d'une réfection complète en lauze calcaire s'établit entre **200 € et 360 € le m² TTC** (fourniture et pose comprise, hors renforcement de charpente). Pour préserver ce patrimoine exceptionnel, plusieurs dispositifs de subvention peuvent être sollicités :
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 25px 0;">
+              <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
+                <h4 style="font-family: var(--font-heading); font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">🏛️ Fondation du Patrimoine</h4>
+                <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                  Octroi d'un label pour les édifices non classés visibles de la rue, ouvrant droit à des subventions directes (5% à 20%) et à des déductions fiscales importantes sur l'impôt sur le revenu (jusqu'à 50% du reste-à-charge).
+                </p>
+              </div>
+              <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
+                <h4 style="font-family: var(--font-heading); font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">🏞️ Aides Départementales &amp; Région</h4>
+                <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                  Le Département de l'Isère et la Région Auvergne-Rhône-Alpes proposent des enveloppes d'aides aux propriétaires privés pour la restauration des « toitures traditionnelles de pays » afin de préserver l'identité de nos paysages.
+                </p>
+              </div>
+            </div>
           </div>
         </article>
 
-        <!-- Right: StepsForm -->
+        <!-- Right: StepsForm & Links -->
         <aside style="display: flex; flex-direction: column; gap: 30px;">
           <div>
             <StepsForm />
@@ -83,9 +116,9 @@ const breadcrumbItems = [
           <div style="background: white; border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); border-radius: var(--radius-sm); padding: 25px; box-shadow: var(--shadow-sm);">
             <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Dossiers Pratiques</h3>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; padding: 0;">
-              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold;">📊 Grille de Tarifs 2026</a></li>
-              <li><a href="/guide-toiture-montagne/" style="color: var(--text); font-weight: bold;">❄️ Normes Neige &amp; Altitude</a></li>
-              <li><a href="/communes/" style="color: var(--text); font-weight: bold;">🗺️ Annuaire Communes (38)</a></li>
+              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold; transition: var(--transition);" class="aside-link">📊 Grille de Tarifs 2026</a></li>
+              <li><a href="/guide-toiture-montagne/" style="color: var(--text); font-weight: bold; transition: var(--transition);" class="aside-link">❄️ Normes Neige &amp; Charge C2</a></li>
+              <li><a href="/communes/" style="color: var(--text); font-weight: bold; transition: var(--transition);" class="aside-link">🗺️ Annuaire Communes (38)</a></li>
             </ul>
           </div>
         </aside>
@@ -126,5 +159,9 @@ const breadcrumbItems = [
     border-left: 4px solid var(--secondary);
     border-radius: 4px;
     font-style: italic;
+  }
+  .aside-link:hover {
+    color: var(--secondary) !important;
+    padding-left: 5px;
   }
 </style>

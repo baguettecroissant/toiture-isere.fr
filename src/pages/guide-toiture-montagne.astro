@@ -19,10 +19,10 @@ const breadcrumbItems = [
     <div class="container">
       <div class="two-column-layout" style="align-items: start; gap: 40px;">
         <!-- Left: Technical Content -->
-        <article style="display: flex; flex-direction: column; gap: 30px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
+        <article style="display: flex; flex-direction: column; gap: 35px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
           <header style="display: flex; flex-direction: column; gap: 15px;">
             <span style="font-family: var(--font-mono); font-size: 13px; color: var(--secondary); font-weight: 700;">
-              📚 DOSSIER TECHNIQUE ALTITUDE
+              📚 DOSSIER TECHNIQUE ALTITUDE &amp; RÉGLEMENTATION ISÈRE
             </span>
             <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin: 0; line-height: 1.25;">
               Toiture &amp; Neige en Isère : Normes de Montagne &amp; Charge Neige C2
@@ -43,37 +43,123 @@ const breadcrumbItems = [
           <div class="rich-content">
             <h2>1. La surcharge de neige : Réglementation Zone C2</h2>
             <p>
-              L'Isère est classée en plusieurs zones de neige nationales. Les zones de montagne du 38 relèvent principalement de la <strong>zone de neige C2</strong> (selon les Eurocodes 1 - EN 1991-1-3).
+              L'Isère est classée en plusieurs zones de charge de neige nationales. Les zones de montagne du 38 relèvent principalement de la <strong>zone de neige C2</strong> (selon les Eurocodes 1 - EN 1991-1-3). À ces altitudes, la neige qui s'accumule sur les toits peut peser très lourd, surtout lors des épisodes de redoux où la neige se gorge d'eau de pluie ou de fonte.
             </p>
             <p>
-              À partir de 500 mètres d'altitude, la charge de neige de calcul augmente de façon significative pour atteindre 100 à 200 kg par m² de toiture. Les charpentes doivent posséder des sections renforcées calculées selon l'Eurocode 5 (bois de charpente en résineux séché de classe C24, principalement sapin ou mélèze de pays).
+              La formule réglementaire de calcul de la charge de neige sur la toiture (S) s'exprime par le produit de la charge caractéristique de neige au sol (S_k) par le coefficient de forme de la toiture (&mu;_i), ajusté par les surcharges accidentelles éventuelles (S_Ad) :
+            </p>
+            <div style="background: var(--bg); padding: 18px 24px; border-left: 4px solid var(--primary); border-radius: var(--radius-sm); margin: 20px 0; font-family: var(--font-mono); font-size: 15px; font-weight: bold; text-align: center;">
+              S = &mu;<sub>i</sub> &times; S<sub>k</sub> + S<sub>Ad</sub>
+            </div>
+            
+            <p>
+              Pour aider les concepteurs et les propriétaires à évaluer la surcharge nominale de calcul au sol selon l'altitude en Isère, voici un tableau récapitulatif des valeurs indicatives de la zone C2 :
+            </p>
+
+            <div style="overflow-x: auto; margin: 25px 0; border: 2.5px solid var(--border-color); border-radius: var(--radius-md);">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+                <thead>
+                  <tr style="background: var(--primary); color: white;">
+                    <th style="padding: 12px 16px; font-weight: bold;">Altitude du Projet (m)</th>
+                    <th style="padding: 12px 16px; font-weight: bold;">Charge Caractéristique S<sub>k</sub> (kg/m²)</th>
+                    <th style="padding: 12px 16px; font-weight: bold;">Charge Accidentelle S<sub>Ad</sub> (kg/m²)</th>
+                    <th style="padding: 12px 16px; font-weight: bold;">Exemple de Communes en Isère</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px 16px; font-weight: bold; color: var(--primary);">200m – 300m</td>
+                    <td style="padding: 12px 16px;">65 kg/m²</td>
+                    <td style="padding: 12px 16px;">135 kg/m²</td>
+                    <td style="padding: 12px 16px;">Grenoble, Meylan, Échirolles, Vienne</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                    <td style="padding: 12px 16px; font-weight: bold; color: var(--primary);">500m</td>
+                    <td style="padding: 12px 16px;">95 kg/m²</td>
+                    <td style="padding: 12px 16px;">180 kg/m²</td>
+                    <td style="padding: 12px 16px;">Vizille, Saint-Laurent-du-Pont, Allevard</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px 16px; font-weight: bold; color: var(--primary);">800m</td>
+                    <td style="padding: 12px 16px;">140 kg/m²</td>
+                    <td style="padding: 12px 16px;">240 kg/m²</td>
+                    <td style="padding: 12px 16px;">Le Bourg-d'Oisans, Saint-Nizier-du-Moucherotte</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                    <td style="padding: 12px 16px; font-weight: bold; color: var(--primary);">1000m</td>
+                    <td style="padding: 12px 16px;">180 kg/m²</td>
+                    <td style="padding: 12px 16px;">290 kg/m²</td>
+                    <td style="padding: 12px 16px;">Villard-de-Lans, Lans-en-Vercors, Autrans</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px 16px; font-weight: bold; color: var(--primary);">1500m+</td>
+                    <td style="padding: 12px 16px;">270 kg/m²</td>
+                    <td style="padding: 12px 16px;">380 kg/m²</td>
+                    <td style="padding: 12px 16px;">Chamrousse, L'Alpe d'Huez, Les Deux Alpes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              À partir de 500 mètres d'altitude, la charge de neige de calcul augmente de façon très significative. Les charpentes doivent posséder des sections renforcées calculées selon l'<strong>Eurocode 5</strong> (bois de charpente en résineux séché de classe C24 minimum, principalement sapin, épicéa ou mélèze de pays) afin de résister aux surcharges exceptionnelles de neige de montagne sans subir de déformation plastique ou de fluage sous la charge stagnante.
             </p>
 
             <h2>2. L'obligation des crochets d'arrêt de neige (anti-avalanche)</h2>
             <p>
-              La neige d'altitude a tendance à glisser le long des rampants de toiture, en particulier sur les couvertures lisses comme l'ardoise ou la tôle. Ce phénomène de glissement peut arracher les cheneaux de zinguerie ou provoquer des chutes de neige massives (avalanches de toit) dangereuses pour la sécurité publique.
+              La neige d'altitude a tendance à glisser le long des rampants de toiture, en particulier sur les couvertures lisses comme l'ardoise naturelle ou le bac acier. Ce phénomène de glissement peut arracher les cheneaux de zinguerie ou provoquer des chutes de neige massives (avalanches de toit) dangereuses pour la sécurité publique.
             </p>
             <p>
-              Les <strong>crochets arrêts de neige</strong> (aussi appelés crochets anti-glisse) en acier galvanisé ou inox sont répartis de manière uniforme sur la couverture (environ 2 à 4 crochets par m²). Ils retiennent la neige en bas de toiture pour qu'elle fonde progressivement.
+              Les <strong>crochets arrêts de neige</strong> (aussi appelés crochets anti-glisse) en acier galvanisé ou en acier laqué inoxydable sont indispensables pour stabiliser le manteau neigeux. Ils doivent être répartis de manière uniforme sur la couverture (en quinconce) sur toute la surface de la toiture pour découper la plaque de glace à sa base.
             </p>
 
-            <h2>3. L'isolation thermique par Sarking : la solution montagne</h2>
             <p>
-              L'isolation thermique des toitures de chalet par l'extérieur, dite méthode du <strong>sarking</strong>, est particulièrement adaptée aux hivers froids isérois :
+              Pour assurer une sécurité maximale, la densité de pose des crochets est déterminée selon la pente du toit et l'exposition du bâtiment :
             </p>
+            
             <ul>
-              <li><strong>Élimination des ponts thermiques :</strong> Pose d'un isolant rigide continu (fibre de bois double densité ou mousse polyuréthane) sur le dessus des chevrons.</li>
-              <li><strong>Confort d'été et d'hiver :</strong> Excellent déphasage thermique et barrière étanche contre le froid extrême.</li>
-              <li><strong>Gain de place :</strong> Conserve les poutres et charpentes apparentes à l'intérieur.</li>
+              <li><strong>Pente de 25° à 35° :</strong> Pose de 2 à 3 crochets par m², répartis régulièrement.</li>
+              <li><strong>Pente de 35° à 45° :</strong> Pose de 3 à 4 crochets par m² en resserrant les lignes en bas de toiture.</li>
+              <li><strong>Pente supérieure à 45° :</strong> Pose de 4 à 6 crochets par m² combinée avec des barres garde-neige tubulaires ancrées sur la structure de faîtage en bas de pente pour retenir les blocs glacés.</li>
             </ul>
 
+            <h2>3. L'isolation thermique par Sarking : la solution de référence en altitude</h2>
+            <p>
+              L'isolation thermique des toitures de chalet par l'extérieur, dite méthode du <strong>sarking</strong>, est particulièrement adaptée aux hivers froids isérois. En effet, près de 30% de la chaleur d'une maison s'échappe par une toiture non isolée.
+            </p>
+            <p>
+              Le Sarking consiste à empiler des panneaux isolants rigides de manière continue au-dessus des chevrons. La couche d'isolant (généralement en fibre de bois haute densité pour son déphasage thermique et sa régulation d'humidité) élimine totalement les ponts thermiques structurels. 
+            </p>
+
+            <div style="background: var(--primary-light); border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); border-radius: var(--radius-sm); padding: 20px; margin: 25px 0;">
+              <h4 style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">📋 Détail des couches d'un montage en Sarking :</h4>
+              <ol style="margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--text-muted); line-height: 1.7;">
+                <li><strong>Platelage :</strong> Lambris décoratif posé sur les chevrons de la charpente, formant le plafond intérieur.</li>
+                <li><strong>Pare-vapeur :</strong> Membrane étanche assurant l'étanchéité à l'air et régulant la migration de l'humidité intérieure.</li>
+                <li><strong>Isolant en panneaux rigides :</strong> Double couche croisée de fibre de bois ou polyuréthane pour atteindre R &ge; 6 ou 7 m².K/W.</li>
+                <li><strong>Écran de sous-toiture HPV :</strong> Protection étanche pare-neige respirante.</li>
+                <li><strong>Contre-liteaux &amp; Liteaux :</strong> Fixés par vis double filetage dans les chevrons pour créer la double lame d'air ventilée de sous-face.</li>
+                <li><strong>Matériau de couverture :</strong> Pose des ardoises naturelles, lauzes ou tuiles de pays.</li>
+              </ol>
+            </div>
+
             <blockquote>
-              <p><strong>Réglementation R=6 minimum :</strong> Pour débloquer les aides financières de l'ANAH et les primes CEE de l'Isère, le coefficient de résistance thermique de l'isolation sous toiture doit atteindre R ≥ 6 m².K/W (en rampants) et R ≥ 7 m².K/W (en combles perdus).</p>
+              <p><strong>Réglementation R=6 minimum :</strong> Pour débloquer les aides financières de l'ANAH et les primes CEE de l'Isère, le coefficient de résistance thermique de l'isolation sous toiture doit atteindre R &ge; 6 m².K/W (en rampants) et R &ge; 7 m².K/W (en combles perdus). En haute montagne, un coefficient R de 7 ou 8 est vivement recommandé pour optimiser le confort d'hiver.</p>
             </blockquote>
+
+            <h2>4. Choix des matériaux pour les toits d'altitude dans le 38</h2>
+            <p>
+              Tous les matériaux ne se valent pas sous les cycles de gel-dégel intenses (jusqu'à 120 cycles par hiver en Isère). Les matériaux préconisés en montagne incluent :
+            </p>
+            <ul>
+              <li><strong>L'ardoise naturelle :</strong> Très durable, absorption d'eau quasi nulle (W1 selon EN 12326-1), elle ne craint pas le gel et offre une durée de vie supérieure à 100 ans. Elle doit être fixée avec des crochets en acier inoxydable 316 (qualité marine).</li>
+              <li><strong>Les tuiles terre cuite haut de gamme :</strong> Doivent posséder la certification NF EN 539-2 méthode C (Zone 3 Grand Gel) garantissant leur résistance après 150 cycles de gel-dégel accélérés en laboratoire.</li>
+              <li><strong>La lauze calcaire traditionnelle :</strong> Dalles de pierre brute dauphinoise d'une longévité exceptionnelle, idéales pour la restauration du patrimoine ancien dans le Vercors ou la Chartreuse.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- Right: StepsForm -->
+        <!-- Right: StepsForm & Links -->
         <aside style="display: flex; flex-direction: column; gap: 30px;">
           <div>
             <StepsForm />
@@ -82,9 +168,9 @@ const breadcrumbItems = [
           <div style="background: white; border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); border-radius: var(--radius-sm); padding: 25px; box-shadow: var(--shadow-sm);">
             <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Dossiers Pratiques</h3>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; padding: 0;">
-              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold;">📊 Grille de Tarifs 2026</a></li>
-              <li><a href="/lauze-traditionnelle/" style="color: var(--text); font-weight: bold;">🪨 Tradition Lauze Alpin</a></li>
-              <li><a href="/communes/" style="color: var(--text); font-weight: bold;">🗺️ Annuaire Communes (38)</a></li>
+              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold; transition: var(--transition);" class="aside-link">📊 Grille de Tarifs 2026</a></li>
+              <li><a href="/lauze-traditionnelle/" style="color: var(--text); font-weight: bold; transition: var(--transition);" class="aside-link">🪨 Tradition Lauze Alpin</a></li>
+              <li><a href="/communes/" style="color: var(--text); font-weight: bold; transition: var(--transition);" class="aside-link">🗺️ Annuaire Communes (38)</a></li>
             </ul>
           </div>
         </aside>
@@ -125,5 +211,9 @@ const breadcrumbItems = [
     border-left: 4px solid var(--secondary);
     border-radius: 4px;
     font-style: italic;
+  }
+  .aside-link:hover {
+    color: var(--secondary) !important;
+    padding-left: 5px;
   }
 </style>

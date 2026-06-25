@@ -130,166 +130,164 @@ const maintenanceChecklist = [
     </div>
   </section>
 
-  <!-- ═══ METHODOLOGIE ═══ -->
-  <section style="padding: 70px 0; background-color: var(--card-bg);">
-    <div class="container">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
-        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
-          Les étapes clés d'un entretien de toiture réussi à {commune.nom}
-        </h2>
-        <p style="font-size: 15.5px; color: var(--text-muted);">
-          Un protocole rigoureux en 4 étapes pour redonner son éclat à votre toit et prolonger sa durée de vie de plus de 15 ans.
-        </p>
-      </div>
+  {local.sectionOrder.map((sectionId) => {
+    if (sectionId === 'methodology') {
+      return (
+        <section style="padding: 70px 0; background-color: var(--card-bg);">
+          <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+              <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
+                {local.headings.methodology}
+              </h2>
+              <p style="font-size: 15.5px; color: var(--text-muted);">
+                Un protocole rigoureux en 4 étapes pour redonner son éclat à votre toit et prolonger sa durée de vie de plus de 15 ans.
+              </p>
+            </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-        {maintenanceChecklist.map((item) => (
-          <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm); transition: var(--transition);" class="checklist-card">
-            <div style="font-size: 32px; margin-bottom: 14px;">{item.icon}</div>
-            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">{item.label}</h3>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">{item.detail}</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+              {maintenanceChecklist.map((item) => (
+                <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm); transition: var(--transition);" class="checklist-card">
+                  <div style="font-size: 32px; margin-bottom: 14px;">{item.icon}</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">{item.label}</h3>
+                  <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">{item.detail}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
+        </section>
+      );
+    }
+    if (sectionId === 'specificities') {
+      return (
+        <section style="padding: 70px 0; background-color: var(--bg); border-top: 1.5px solid var(--border-color);">
+          <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+              <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
+                {local.headings.specificities}
+              </h2>
+              <p style="font-size: 15.5px; color: var(--text-muted);">
+                Comment le climat isérois influe sur l'apparition des végétaux et les techniques de traitement à employer.
+              </p>
+            </div>
 
-  <!-- ═══ SPECIFICITES LOCALES ═══ -->
-  <section style="padding: 70px 0; background-color: var(--bg); border-top: 1.5px solid var(--border-color);">
-    <div class="container">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
-        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
-          Contraintes environnementales à {commune.nom} (38)
-        </h2>
-        <p style="font-size: 15.5px; color: var(--text-muted);">
-          Comment le climat isérois influe sur l'apparition des végétaux et les techniques de traitement à employer.
-        </p>
-      </div>
+            <div class="grid-3">
+              {local.cards.map((card) => (
+                <div class="card" style="background: white;">
+                  <div style="font-size: 28px; margin-bottom: 12px;">{card.icon}</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">{card.title}</h3>
+                  <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
+                    {card.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    if (sectionId === 'prices') {
+      return (
+        <section style="padding: 70px 0; background-color: var(--card-bg); border-top: 1.5px solid var(--border-color);">
+          <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+              <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
+                {local.headings.prices}
+              </h2>
+              <p style="font-size: 15.5px; color: var(--text-muted);">
+                Grille de tarifs moyens constatés dans le {commune.codePostal} pour l'entretien et le traitement préventif de couverture. Tarifs TTC, main d'œuvre incluse.
+              </p>
+            </div>
 
-      <div class="grid-3">
-        <div class="card" style="background: white;">
-          <div style="font-size: 28px; margin-bottom: 12px;">❄️</div>
-          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Climat &amp; Gels Hivernaux</h3>
-          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
-            {local.climateContext}
-          </p>
-        </div>
-
-        <div class="card" style="background: white;">
-          <div style="font-size: 28px; margin-bottom: 12px;">🏛️</div>
-          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Esthétique &amp; PLU</h3>
-          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
-            {local.abfRegulations}
-          </p>
-        </div>
-
-        <div class="card" style="background: white;">
-          <div style="font-size: 28px; margin-bottom: 12px;">🏡</div>
-          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Architecture &amp; Bâti local</h3>
-          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
-            {local.housingTypologyInsight}
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ TARIFS ═══ -->
-  <section style="padding: 70px 0; background-color: var(--card-bg); border-top: 1.5px solid var(--border-color);">
-    <div class="container">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
-        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
-          Prix du Nettoyage et Traitement de Toiture à {commune.nom} (2026)
-        </h2>
-        <p style="font-size: 15.5px; color: var(--text-muted);">
-          Grille de tarifs moyens constatés dans le {commune.codePostal} pour l'entretien et le traitement préventif de couverture. Tarifs TTC, main d'œuvre incluse.
-        </p>
-      </div>
-
-      <div style="max-width: 880px; margin: 0 auto; overflow-x: auto; background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
-        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14.5px;">
-          <thead>
-            <tr style="background: var(--primary); color: white;">
-              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Prestation</th>
-              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Budget Moyen 2026</th>
-              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Type d'Intervention</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
-              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Démoussage + Hydrofuge Antigel (Siloxane)</td>
-              <td style="padding: 15px 20px;"><span class="price-tag" style="background: var(--secondary); color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;">{prices.demoussageHydro.min} – {prices.demoussageHydro.max} € / m²</span></td>
-              <td style="padding: 15px 20px; color: var(--text-muted);">Nettoyage complet + algicide + imperméabilisation</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Nettoyage mécanique simple (sans hydrofuge)</td>
-              <td style="padding: 15px 20px;"><span class="price-tag">{Math.round(prices.demoussageHydro.min * 0.7)} – {Math.round(prices.demoussageHydro.max * 0.7)} € / m²</span></td>
-              <td style="padding: 15px 20px; color: var(--text-muted);">Brossage, grattage manuel des mousses & vidage gouttières</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
-              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Traitement algicide/antimousse curatif seul</td>
-              <td style="padding: 15px 20px;"><span class="price-tag">{Math.round(prices.demoussageHydro.min * 0.5)} – {Math.round(prices.demoussageHydro.max * 0.5)} € / m²</span></td>
-              <td style="padding: 15px 20px; color: var(--text-muted);">Pulvérisation sans rinçage (action lente par temps sec)</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Réparation de fuites & Remplacement de tuiles cassées</td>
-              <td style="padding: 15px 20px;"><span class="price-tag">{prices.reparationFuite.min} – {prices.reparationFuite.max} €</span></td>
-              <td style="padding: 15px 20px; color: var(--text-muted);">Forfait selon urgence et nombre de tuiles à remplacer</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
-              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Nettoyage de gouttières & Chéneaux</td>
-              <td style="padding: 15px 20px;"><span class="price-tag">8 – 15 € / ml</span></td>
-              <td style="padding: 15px 20px; color: var(--text-muted);">Retrait des débris et contrôle des évacuations</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Pose de crapaudines et pare-feuilles (gouttières)</td>
-              <td style="padding: 15px 20px;"><span class="price-tag">15 – 25 € / ml</span></td>
-              <td style="padding: 15px 20px; color: var(--text-muted);">Grilles de protection en aluminium ou PVC renforcé</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 16px;">
-        ⚠️ Tarifs estimatifs TTC pour 2026. L'accessibilité de la toiture (hauteur, pente) peut influer sur le coût de la main d'œuvre.
-      </p>
-      <div style="text-align: center; margin-top: 25px;">
-        <a href="#devis" class="btn-primary" style="display: inline-block;">📋 Demander un devis démoussage pour {commune.nom} →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ IMPACT D'UN BON ENTRETIEN ═══ -->
-  <section style="padding: 70px 0; background: linear-gradient(180deg, #F0FDF4 0%, #fff 100%); border-top: 1.5px solid var(--border-color);">
-    <div class="container" style="max-width: 900px;">
-      <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
-          Pourquoi entretenir régulièrement sa toiture à {commune.nom} ?
-        </h2>
-      </div>
-
-      <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
-        <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px;">
-          <span style="font-size: 36px; flex-shrink: 0;">🏡</span>
-          <div>
-            <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Préservation de l'Isolation Thermique</h3>
-            <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin: 0;">
-              Des tuiles poreuses laissent passer l'humidité qui vient imbiber l'isolant situé juste en dessous (laine de verre ou ouate de cellulose). Un isolant humide perd jusqu'à 60% de sa résistance thermique. Entretenir les tuiles protège directement votre confort et réduit vos factures de chauffage en Isère.
+            <div style="max-width: 880px; margin: 0 auto; overflow-x: auto; background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14.5px;">
+                <thead>
+                  <tr style="background: var(--primary); color: white;">
+                    <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Prestation</th>
+                    <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Budget Moyen 2026</th>
+                    <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Type d'Intervention</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                    <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Démoussage + Hydrofuge Antigel (Siloxane)</td>
+                    <td style="padding: 15px 20px;"><span class="price-tag" style="background: var(--secondary); color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;">{prices.demoussageHydro.min} – {prices.demoussageHydro.max} € / m²</span></td>
+                    <td style="padding: 15px 20px; color: var(--text-muted);">Nettoyage complet + algicide + imperméabilisation</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Nettoyage mécanique simple (sans hydrofuge)</td>
+                    <td style="padding: 15px 20px;"><span class="price-tag">{Math.round(prices.demoussageHydro.min * 0.7)} – {Math.round(prices.demoussageHydro.max * 0.7)} € / m²</span></td>
+                    <td style="padding: 15px 20px; color: var(--text-muted);">Brossage, grattage manuel des mousses & vidage gouttières</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                    <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Traitement algicide/antimousse curatif seul</td>
+                    <td style="padding: 15px 20px;"><span class="price-tag">{Math.round(prices.demoussageHydro.min * 0.5)} – {Math.round(prices.demoussageHydro.max * 0.5)} € / m²</span></td>
+                    <td style="padding: 15px 20px; color: var(--text-muted);">Pulvérisation sans rinçage (action lente par temps sec)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Réparation de fuites & Remplacement de tuiles cassées</td>
+                    <td style="padding: 15px 20px;"><span class="price-tag">{prices.reparationFuite.min} – {prices.reparationFuite.max} €</span></td>
+                    <td style="padding: 15px 20px; color: var(--text-muted);">Forfait selon urgence et nombre de tuiles à remplacer</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                    <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Nettoyage de gouttières & Chéneaux</td>
+                    <td style="padding: 15px 20px;"><span class="price-tag">8 – 15 € / ml</span></td>
+                    <td style="padding: 15px 20px; color: var(--text-muted);">Retrait des débris et contrôle des évacuations</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Pose de crapaudines et pare-feuilles (gouttières)</td>
+                    <td style="padding: 15px 20px;"><span class="price-tag">15 – 25 € / ml</span></td>
+                    <td style="padding: 15px 20px; color: var(--text-muted);">Grilles de protection en aluminium ou PVC renforcé</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 16px;">
+              ⚠️ Tarifs estimatifs TTC pour 2026. L'accessibilité de la toiture (hauteur, pente) peut influer sur le coût de la main d'œuvre.
             </p>
+            <div style="text-align: center; margin-top: 25px;">
+              <a href="#devis" class="btn-primary" style="display: inline-block;">📋 Demander un devis démoussage pour {commune.nom} →</a>
+            </div>
           </div>
-        </div>
-        <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 28px;" />
-        <div style="display: flex; align-items: flex-start; gap: 16px;">
-          <span style="font-size: 36px; flex-shrink: 0;">💰</span>
-          <div>
-            <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Une Économie de Réfection Majeure</h3>
-            <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin: 0;">
-              Rénover entièrement une toiture en Isère coûte en moyenne entre 10 000 € et 25 000 €. Un nettoyage et un traitement hydrofuge régulier (tous les 10 à 15 ans) pour un coût de 1 500 € à 3 000 € permet de prolonger la durée de vie de vos tuiles existantes jusqu'à 40 ans, repoussant ainsi de plusieurs décennies des travaux lourds.
-            </p>
+        </section>
+      );
+    }
+    if (sectionId === 'impact') {
+      return (
+        <section style="padding: 70px 0; background: linear-gradient(180deg, #F0FDF4 0%, #fff 100%); border-top: 1.5px solid var(--border-color);">
+          <div class="container" style="max-width: 900px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+              <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
+                {local.headings.impact}
+              </h2>
+            </div>
+
+            <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px;">
+                <span style="font-size: 36px; flex-shrink: 0;">🏡</span>
+                <div>
+                  <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Préservation de l'Isolation Thermique</h3>
+                  <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin: 0;">
+                    Des tuiles poreuses laissent passer l'humidité qui vient imbiber l'isolant situé juste en dessous (laine de verre ou ouate de cellulose). Un isolant humide perd jusqu'à 60% de sa résistance thermique. Entretenir les tuiles protège directement votre confort et réduit vos factures de chauffage en Isère.
+                  </p>
+                </div>
+              </div>
+              <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 28px;" />
+              <div style="display: flex; align-items: flex-start; gap: 16px;">
+                <span style="font-size: 36px; flex-shrink: 0;">💰</span>
+                <div>
+                  <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Une Économie de Réfection Majeure</h3>
+                  <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.75; margin: 0;">
+                    Rénover entièrement une toiture en Isère coûte en moyenne entre 10 000 € et 25 000 €. Un nettoyage et un traitement hydrofuge régulier (tous les 10 à 15 ans) pour un coût de 1 500 € à 3 000 € permet de prolonger la durée de vie de vos tuiles existantes jusqu'à 40 ans, repoussant ainsi de plusieurs décennies des travaux lourds.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
+      );
+    }
+    return null;
+  })}
 
   <!-- ═══ FAQ ═══ -->
   <section style="padding: 70px 0; background-color: var(--bg); border-top: 1.5px solid var(--border-color);">

@@ -144,9 +144,6 @@ function getAltitude(slug) {
 }
 
 function getIntercommunalite(slug, region) {
-  const c = communes.find(com => com.slug === slug);
-  if (!c) return "Département de l'Isère";
-  
   const cuvetteList = ['grenoble', 'echirolles', 'saint-martin-d-heres', 'fontaine', 'meylan', 'saint-egreve', 'seyssinet-pariset', 'le-pont-de-claix', 'sassenage', 'claix', 'eybens', 'gieres', 'la-tronche', 'domene', 'saint-ismier', 'corenc', 'seyssins', 'varces-allieres-et-risset', 'vif', 'vizille'];
   if (cuvetteList.includes(slug)) return "Grenoble-Alpes Métropole (La Métro)";
   
@@ -214,7 +211,7 @@ const HABITAT_BY_REGION = {
 function getHabitatType(slug, region) {
   if (slug === 'grenoble') return "immeubles du centre historique de Grenoble aux toitures en tuiles anciennes ou zinc, copropriétés urbaines des grands boulevards à toits-terrasses et pavillons des berges du Drac";
   if (slug === 'voiron') return "maisons de ville voironnaises au pied des collines de la Chartreuse, pavillons des coteaux et anciennes remises couvertes de tuiles mécaniques";
-  if (slug === 'vienne') return "bâtisses historiques du centre de Vienne aux toitures imbriquées en tuiles dauphinoises de terre cuite, immeubles de la vallée du Rhône et villas récentes des plateaux";
+  if (slug === 'vienne') return "bâtisses historiques du centre de Vienne aux toitures en tuiles dauphinoises de terre cuite, immeubles de la vallée du Rhône et villas récentes des plateaux";
   if (slug === 'bourgoin-jallieu') return "anciennes maisons d'ouvriers textiles en pisé de la vallée de la Bourbre, pavillons individuels et complexes d'activités commerciales";
   
   const habitats = HABITAT_BY_REGION[region] || HABITAT_BY_REGION['grenoble-cuvette'];
@@ -235,7 +232,7 @@ function getRoofCharacteristics(slug, region) {
 }
 
 // ──────────────────────────────────────────────────────────────
-// TEMPLATES D'INTRO STRUCTURELLEMENT DIFFÉRENTS
+// TEMPLATES D'INTRO (12 distinct options to avoid structure duplicates)
 // ──────────────────────────────────────────────────────────────
 function getLocalIntroText(commune, region) {
   const { nom, slug, population, codePostal } = commune;
@@ -260,14 +257,22 @@ function getLocalIntroText(commune, region) {
     
     () => `À ${nom} (${codePostal}), les travaux de toiture doivent concilier tradition dauphinoise et solidité. Cette commune de ${pop} habitants, située dans ${regionData.description}, regroupe des bâtisses composées de ${habitat}. ${regionData.climate.charAt(0).toUpperCase() + regionData.climate.slice(1)} augmente les risques de ${regionData.roofRisk}, rendant indispensable l'intervention d'un artisan couvreur certifié de l'Isère.`,
     
-    () => `Le climat de l'Isère met à l'épreuve les toitures de ${nom}. L'hiver amène le gel persistant et de lourdes charges de neige en montagne, tandis que l'été apporte de violents orages et de fortes chaleurs. Le bâti de cette commune de ${pop} habitants — ${habitat} — demande des techniques de pose robustes. Les couvreurs du secteur de ${regionData.label} adaptent leur savoir-faire à ${regionData.description}.`
+    () => `Le climat de l'Isère met à l'épreuve les toitures de ${nom}. L'hiver amène le gel persistant et de lourdes charges de neige en montagne, tandis que l'été apporte de violents orages et de fortes chaleurs. Le bâti de cette commune de ${pop} habitants — ${habitat} — demande des techniques de pose robustes. Les couvreurs du secteur de ${regionData.label} adaptent leur savoir-faire à ${regionData.description}.`,
+
+    () => `Face aux caprices du climat isérois, les habitations de ${nom} (${codePostal}) exigent des couvertures irréprochables. ${nom} compte ${pop} habitants installés majoritairement dans ${habitat}. Les contraintes liées à ${regionData.climate} imposent aux couvreurs locaux d'anticiper le risque de ${regionData.roofRisk}. Les chantiers réalisés près de ${landmarks[0]} utilisent des tuiles grand gel ou de l'ardoise naturelle de qualité supérieure.`,
+
+    () => `Dans le périmètre de ${landmarks[0]} à ${nom}, la rénovation de toiture revêt un caractère hautement technique. Avec un parc de logements composé de ${habitat}, cette localité du 38 abrite ${pop} personnes. ${regionData.climate.charAt(0).toUpperCase() + regionData.climate.slice(1)} engendre des problématiques de ${regionData.roofRisk}. Les artisans couvreurs RGE du secteur adaptent leur travail selon la réglementation thermique RE2026.`,
+
+    () => `Avec une altitude moyenne de ${altitude}m, la commune de ${nom} fait face à des cycles saisonniers intenses. Le patrimoine immobilier local est fait de ${habitat}. Les ${pop} habitants de ${nom} connaissent l'impact de ${regionData.climate}. Un entretien soigné permet d'éviter l'usure précoce due à ${regionData.roofRisk}, sous la surveillance des Architectes des Bâtiments de France si la maison est dans le secteur de ${landmarks[0]}.`,
+
+    () => `Pour les propriétaires de ${nom} (${codePostal}), assurer la pérennité de son toit est indispensable. Le climat local se caractérise par ${regionData.climate}, usant directement les toits faits de ${habitat}. Près de ${landmarks[0]}, les entreprises de couverture du 38 proposent des interventions régulières (nettoyage hydrofuge ou isolation continue de sarking) pour limiter l'exposition à ${regionData.roofRisk}.`
   ];
 
-  return pick(slug, 22, templates)();
+  return templates[hash(slug, 22) % templates.length]();
 }
 
 // ──────────────────────────────────────────────────────────────
-// CONSEIL LOCAL
+// CONSEIL LOCAL (15 items)
 // ──────────────────────────────────────────────────────────────
 function getLocalAdvice(commune, region) {
   const { nom, slug, codePostal } = commune;
@@ -286,17 +291,22 @@ function getLocalAdvice(commune, region) {
     `En cas d'infiltration ou de tuile cassée par le gel à ${nom}, prenez des photos immédiates des dégâts intérieurs et sous-toiture. Votre déclaration à l'assurance doit se faire sous 5 jours ouvrés, accompagnée d'un devis de bâchage d'urgence établi par un couvreur local.`,
     altitude > 500
       ? `En altitude à ${nom} (${altitude}m), les crochets anti-avalanche et arrêts de neige en acier galvanisé ou inox sont indispensables. Ils retiennent la couche de neige pour éviter les chutes massives sur les voies publiques ou les entrées de garage.`
-      : `La cuvette thermique à ${nom} surchauffe les toitures en été. Assurez-vous d'une ventilation sous toiture optimale avec des chatières réglementaires et un faîtage à sec ventilé pour réduire la température intérieure sous les combles de votre pavillon.`
+      : `La cuvette thermique à ${nom} surchauffe les toitures en été. Assurez-vous d'une ventilation sous toiture optimale avec des chatières réglementaires et un faîtage à sec ventilé pour réduire la température intérieure sous les combles de votre pavillon.`,
+    `Sur les toitures de ${nom}, privilégiez des raccords de cheminée et de fenêtres de toit (Velux) en zinc ou en plomb plissé plutôt qu'en matériaux synthétiques, car les UV d'altitude et le gel altèrent rapidement les joints polymères.`,
+    `Les eaux pluviales à ${nom} peuvent être très acides en raison des brouillards givrants. La pose de gouttières en zinc naturel ou en aluminium laqué de fort calibre évite le percement rapide et garantit une évacuation parfaite pendant plus de 30 ans.`,
+    `Pour les toits dauphinois traditionnels à forte pente (supérieure à 45°) dans le secteur de ${nom}, assurez-vous que les tuiles de rive soient vissées individuellement sur les pannes de rive pour contrer les rafales de vent canalisées par les vallées.`,
+    `Dans le cas d'une maison ancienne en pisé à ${nom}, tout projet d'isolation de toiture doit impérativement utiliser des matériaux perméables à la vapeur (comme la fibre de bois ou le chanvre) afin de ne pas bloquer l'humidité naturelle des murs porteurs en terre.`,
+    `Planifiez les travaux de réfection lourde de votre toit à ${nom} entre mai et octobre. Les entreprises locales programment leurs interventions d'altitude durant cette fenêtre pour éviter les retards causés par la neige et les tempêtes hivernales.`
   ];
 
-  return pick(slug, 28, advices);
+  return advices[hash(slug, 28) % advices.length];
 }
 
 // ──────────────────────────────────────────────────────────────
-// FAQ
+// FAQ (16 items pool)
 // ──────────────────────────────────────────────────────────────
 function getLocalFAQ(commune, region) {
-  const { nom, slug, codePostal, population } = commune;
+  const { nom, slug, codePostal } = commune;
   const regionData = MICRO_REGIONS[region];
   const altitude = getAltitude(slug);
 
@@ -320,6 +330,10 @@ function getLocalFAQ(commune, region) {
     {
       q: `Faut-il déposer une déclaration de travaux en mairie de ${nom} ?`,
       a: `Oui, une réfection de toiture avec modification des matériaux (couleur, forme de tuile, passage à l'ardoise) ou pose de fenêtres de toit (Velux) nécessite le dépôt d'une déclaration préalable de travaux (DP) au service urbanisme de la mairie de ${nom}.`
+    },
+    {
+      q: `Comment s'assurer de la validité de la garantie décennale d'un couvreur à ${nom} ?`,
+      a: `Demandez l'attestation nominative d'assurance décennale avant le début du chantier à ${nom}. Ce document doit mentionner le nom de l'assureur, le numéro de contrat, les activités couvertes (couverture, charpente, étanchéité) et sa validité géographique pour la région Rhône-Alpes.`
     }
   ];
 
@@ -331,6 +345,18 @@ function getLocalFAQ(commune, region) {
     {
       q: `Comment isoler sa toiture face aux hivers extrêmes à ${nom} ?`,
       a: `Pour faire face aux hivers rigoureux de ${nom}, la méthode d'isolation par l'extérieur (le sarking) est idéale. Elle consiste à poser des panneaux isolants rigides en fibre de bois ou en polyuréthane directement sur les chevrons, éliminant les ponts thermiques et conservant l'espace intérieur des combles.`
+    },
+    {
+      q: `Quel est l'impact de la zone de neige C2 sur la charpente à ${nom} ?`,
+      a: `La zone de neige C2 impose des surcharges de calcul allant jusqu'à 200 kg/m² à ${nom}. Les charpentes doivent posséder des sections de bois renforcées et un entraxe réduit de chevrons pour éviter toute déformation structurelle sous le poids de la neige glacée.`
+    },
+    {
+      q: `Les gouttières en zinc résistent-elles aux hivers montagnards de ${nom} ?`,
+      a: `Oui, le zinc naturel est le matériau le plus durable en montagne. À ${nom}, l'utilisation de crochets de gouttière renforcés (posés tous les 30 ou 40 cm au lieu de 50 cm) empêche l'affaissement des chéneaux sous la charge de la neige glissante.`
+    },
+    {
+      q: `Quel bois choisir pour la charpente de mon chalet à ${nom} ?`,
+      a: `Le mélèze de pays et l'épicéa d'altitude classé C24 ou GL24 (lamellé-collé) sont privilégiés pour les charpentes à ${nom}. Ces essences résineuses à croissance lente possèdent une excellente densité mécanique face aux efforts de flexion.`
     }
   ];
 
@@ -342,6 +368,18 @@ function getLocalFAQ(commune, region) {
     {
       q: `Comment nettoyer sa toiture sans abîmer les tuiles en Isère ?`,
       a: `Nous préconisons un nettoyage doux par brossage manuel et rinçage à basse pression contrôlée. L'utilisation de nettoyeurs haute pression de type Kärcher à pleine puissance est déconseillée car elle rend les tuiles poreuses et sensibles aux futures gelées hivernales à ${nom}.`
+    },
+    {
+      q: `Comment protéger les murs en pisé de ma maison à ${nom} lors d'un chantier ?`,
+      a: `Le pisé craint l'eau stagnante. À ${nom}, les travaux de toiture doivent inclure de larges débords de toit (génoises) de 80 cm à 1,20 m de large, et un bâchage temporaire ultra-sécurisé durant toute la phase de découverture.`
+    },
+    {
+      q: `Quelles sont les aides spécifiques de la métropole grenobloise ou du Pays Voironnais à ${nom} ?`,
+      a: `Les habitants de ${nom} peuvent solliciter les aides locales à la rénovation thermique (comme le dispositif Mur|Mur de Grenoble-Alpes Métropole ou les primes énergie du Voironnais) qui bonifient les aides nationales pour l'isolation de toiture.`
+    },
+    {
+      q: `Quel est le délai moyen pour obtenir un devis toiture à ${nom} ?`,
+      a: `En Isère, le délai moyen pour obtenir la visite d'un couvreur RGE et recevoir un devis détaillé varie entre 4 et 10 jours ouvrés à ${nom}, selon la saisonnalité et l'accessibilité de votre habitation.`
     }
   ];
 
@@ -352,7 +390,8 @@ function getLocalFAQ(commune, region) {
     pool.push(...plainePool);
   }
 
-  const count = (hash(slug, 35) % 2) + 4; // 4 or 5
+  // Deterministically select 4 or 5 FAQs from the pool to create complete variance
+  const count = (hash(slug, 35) % 2) + 4; // 4 or 5 FAQs
   return pickN(slug, 15, pool, count);
 }
 
@@ -392,7 +431,7 @@ function getMarketData(commune, region) {
 // ──────────────────────────────────────────────────────────────
 // MAIN: ENRICHIR TOUTES LES COMMUNES
 // ──────────────────────────────────────────────────────────────
-console.log('Enriching communes data for Isere...');
+console.log('Enriching communes data for Isere with high variance seeds...');
 
 const enriched = communes.map(commune => {
   const region = getMicroRegion(commune.slug);

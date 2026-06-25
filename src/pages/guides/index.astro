@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const posts = await getCollection('guides');
+// Sort posts by date descending
+const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+const title = "Guides & Conseils Rénovation Toiture en Isère (38)";
+const description = "Retrouvez les guides pratiques rédigés par nos artisans couvreurs pour tout savoir sur l'isolation thermique, les prix, les lauzes et les normes neige en Isère.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides & Conseils" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">
+          Dossiers Experts Toiture &amp; Couverture
+        </h1>
+        <p style="font-size: 16.5px; color: var(--text-muted); line-height: 1.6;">
+          Retrouvez nos guides rédigés par des couvreurs du 38 pour vous accompagner dans vos projets de toiture, charpente, nettoyage et aides financières.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+        {sortedPosts.map((post) => (
+          <article style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: var(--transition);" class="guide-card">
+            {post.data.image && (
+              <div style="height: 200px; overflow: hidden; border-bottom: 1.5px solid var(--border-color);">
+                <img 
+                  src={post.data.image} 
+                  alt={post.data.title} 
+                  style="width: 100%; height: 100%; object-fit: cover;" 
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div style="padding: 25px; display: flex; flex-direction: column; flex-grow: 1;">
+              <span style="font-family: var(--font-mono); font-size: 11.5px; color: var(--secondary); font-weight: bold; margin-bottom: 10px;">
+                📅 {new Date(post.data.publishDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </span>
+              <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin: 0 0 12px; line-height: 1.35;">
+                <a href={`/guides/${post.id}/`} style="color: var(--primary); text-decoration: none;">{post.data.title}</a>
+              </h2>
+              <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1;">
+                {post.data.description}
+              </p>
+              <a href={`/guides/${post.id}/`} style="font-family: var(--font-heading); font-weight: bold; font-size: 13.5px; color: var(--secondary); align-self: flex-start;">
+                Lire le guide complet &rarr;
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .guide-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary);
+  }
+  .guide-card h2 a:hover {
+    color: var(--secondary) !important;
+  }
+</style>

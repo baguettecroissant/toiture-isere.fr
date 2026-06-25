@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+
+const title = "Normes & Travaux de Toiture en Montagne en Isère (38) | Guide Altitude";
+const description = "Réglementations de charge de neige zone C2, pose d'ardoise naturelle, crochets arrêts de neige et isolation sarking pour les chalets de l'Isère.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides Toiture Montagne" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div class="two-column-layout" style="align-items: start; gap: 40px;">
+        <!-- Left: Technical Content -->
+        <article style="display: flex; flex-direction: column; gap: 30px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
+          <header style="display: flex; flex-direction: column; gap: 15px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; color: var(--secondary); font-weight: 700;">
+              📚 DOSSIER TECHNIQUE ALTITUDE
+            </span>
+            <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin: 0; line-height: 1.25;">
+              Toiture &amp; Neige en Isère : Normes de Montagne &amp; Charge Neige C2
+            </h1>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; font-style: italic; margin: 0; padding-left: 15px; border-left: 4px solid var(--secondary);">
+              Vivre en altitude dans l'Isère (massifs de l'Oisans, de Belledonne, du Vercors ou de la Chartreuse) impose des normes de construction strictes pour les toitures afin de résister aux charges neigeuses importantes et au gel permanent.
+            </p>
+          </header>
+
+          <div style="border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <img 
+              src="/images/hero-toiture-isere.png" 
+              alt="Neige accumulée sur une toiture de chalet avec crochets arrêts de neige" 
+              style="width: 100%; height: 350px; object-fit: cover;" 
+            />
+          </div>
+
+          <div class="rich-content">
+            <h2>1. La surcharge de neige : Réglementation Zone C2</h2>
+            <p>
+              L'Isère est classée en plusieurs zones de neige nationales. Les zones de montagne du 38 relèvent principalement de la <strong>zone de neige C2</strong> (selon les Eurocodes 1 - EN 1991-1-3).
+            </p>
+            <p>
+              À partir de 500 mètres d'altitude, la charge de neige de calcul augmente de façon significative pour atteindre 100 à 200 kg par m² de toiture. Les charpentes doivent posséder des sections renforcées calculées selon l'Eurocode 5 (bois de charpente en résineux séché de classe C24, principalement sapin ou mélèze de pays).
+            </p>
+
+            <h2>2. L'obligation des crochets d'arrêt de neige (anti-avalanche)</h2>
+            <p>
+              La neige d'altitude a tendance à glisser le long des rampants de toiture, en particulier sur les couvertures lisses comme l'ardoise ou la tôle. Ce phénomène de glissement peut arracher les cheneaux de zinguerie ou provoquer des chutes de neige massives (avalanches de toit) dangereuses pour la sécurité publique.
+            </p>
+            <p>
+              Les <strong>crochets arrêts de neige</strong> (aussi appelés crochets anti-glisse) en acier galvanisé ou inox sont répartis de manière uniforme sur la couverture (environ 2 à 4 crochets par m²). Ils retiennent la neige en bas de toiture pour qu'elle fonde progressivement.
+            </p>
+
+            <h2>3. L'isolation thermique par Sarking : la solution montagne</h2>
+            <p>
+              L'isolation thermique des toitures de chalet par l'extérieur, dite méthode du <strong>sarking</strong>, est particulièrement adaptée aux hivers froids isérois :
+            </p>
+            <ul>
+              <li><strong>Élimination des ponts thermiques :</strong> Pose d'un isolant rigide continu (fibre de bois double densité ou mousse polyuréthane) sur le dessus des chevrons.</li>
+              <li><strong>Confort d'été et d'hiver :</strong> Excellent déphasage thermique et barrière étanche contre le froid extrême.</li>
+              <li><strong>Gain de place :</strong> Conserve les poutres et charpentes apparentes à l'intérieur.</li>
+            </ul>
+
+            <blockquote>
+              <p><strong>Réglementation R=6 minimum :</strong> Pour débloquer les aides financières de l'ANAH et les primes CEE de l'Isère, le coefficient de résistance thermique de l'isolation sous toiture doit atteindre R ≥ 6 m².K/W (en rampants) et R ≥ 7 m².K/W (en combles perdus).</p>
+            </blockquote>
+          </div>
+        </article>
+
+        <!-- Right: StepsForm -->
+        <aside style="display: flex; flex-direction: column; gap: 30px;">
+          <div>
+            <StepsForm />
+          </div>
+
+          <div style="background: white; border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); border-radius: var(--radius-sm); padding: 25px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Dossiers Pratiques</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; padding: 0;">
+              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold;">📊 Grille de Tarifs 2026</a></li>
+              <li><a href="/lauze-traditionnelle/" style="color: var(--text); font-weight: bold;">🪨 Tradition Lauze Alpin</a></li>
+              <li><a href="/communes/" style="color: var(--text); font-weight: bold;">🗺️ Annuaire Communes (38)</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .rich-content h2 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary);
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+  }
+  .rich-content p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .rich-content ul {
+    margin-bottom: 20px;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rich-content li {
+    line-height: 1.6;
+  }
+  .rich-content blockquote {
+    margin: 25px 0;
+    padding: 15px 20px;
+    background-color: var(--primary-light);
+    border-left: 4px solid var(--secondary);
+    border-radius: 4px;
+    font-style: italic;
+  }
+</style>

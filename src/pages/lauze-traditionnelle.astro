@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+
+const title = "Toiture en Lauze Calcaire Traditionnelle en Isère (38) | Guide Rénovation";
+const description = "Restauration et prix des toitures historiques en lauze calcaire dans les villages traditionnels du Dauphiné et de l'Isère.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Lauze Traditionnelle Dauphinoise" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div class="two-column-layout" style="align-items: start; gap: 40px;">
+        <!-- Left: Technical Content -->
+        <article style="display: flex; flex-direction: column; gap: 30px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
+          <header style="display: flex; flex-direction: column; gap: 15px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; color: var(--secondary); font-weight: 700;">
+              🏛️ PATRIMOINE ARCHITECTURAL ALPIN
+            </span>
+            <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin: 0; line-height: 1.25;">
+              La Lauze Calcaire Dauphinoise : Restauration et Prix de Pose
+            </h1>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; font-style: italic; margin: 0; padding-left: 15px; border-left: 4px solid var(--secondary);">
+              Les toitures en lauzes calcaires constituent l'emblème historique des villages et hameaux dauphinois de l'Isère. Ce savoir-faire rare de couvreur-lauzier est préservé par des artisans locaux spécialisés.
+            </p>
+          </header>
+
+          <div style="border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <img 
+              src="/images/hero-toiture-isere.png" 
+              alt="Détail d'une toiture traditionnelle en lauze calcaire dauphinoise" 
+              style="width: 100%; height: 350px; object-fit: cover;" 
+            />
+          </div>
+
+          <div class="rich-content">
+            <h2>1. Qu'est-ce que la lauze calcaire traditionnelle ?</h2>
+            <p>
+              La <strong>lauze</strong> est une dalle de pierre calcaire ou schisteuse extraite de carrières locales. Traditionnellement, les lauzes dauphinoises proviennent de sédiments calcaires du Grésivaudan, de la Chartreuse ou de l'Oisans.
+            </p>
+            <p>
+              Contrairement à l'ardoise qui est fine et calibrée, la lauze est une pierre lourde (jusqu'à 150 à 250 kg par m²), d'épaisseur variable (entre 2 et 5 cm) et posée selon des techniques ancestrales d'empilage et de calage mécanique sur une charpente robuste en châtaignier ou en chêne.
+            </p>
+
+            <h2>2. La technique de pose et de restauration</h2>
+            <p>
+              La pose d'une couverture en lauzes calcaires est un travail d'orfèvre qui requiert patience et précision :
+            </p>
+            <ul>
+              <li><strong>Le tri des pierres :</strong> Les lauzes les plus grandes et lourdes sont positionnées en bas (à l'égout du toit) et les plus petites en haut (vers le faîtage).</li>
+              <li><strong>Le calage :</strong> Chaque pierre est posée avec un recouvrement partiel et calée mécaniquement pour assurer l'écoulement des eaux pluviales sans infiltration, même lors des orages cévenols.</li>
+              <li><strong>La charpente renforcée :</strong> En raison de la charge considérable de la lauze (jusqu'à 2,5 tonnes pour 10 m²), la charpente en bois de pays doit être dimensionnée en conséquence, avec des pannes de forte section.</li>
+            </ul>
+
+            <h2>3. Quels sont les tarifs pour refaire une toiture en lauze ?</h2>
+            <p>
+              En raison de la rareté de la pierre de carrière et du temps de main d'œuvre très élevé (comptez environ 1 à 2 m² posés par jour et par artisan), la lauze est le matériau de couverture le plus cher du marché :
+            </p>
+            <ul>
+              <li><strong>Prix moyen de pose :</strong> Prévoyez entre <strong>200 € et 350 € le m² TTC</strong> (fourniture de pierres neuves ou de réemploi et main d'œuvre incluses).</li>
+              <li><strong>Entretien préventif :</strong> Un examen visuel tous les 10 ans permet de remplacer les lauzes cassées ou glissées par le gel et de pérenniser la charpente pour plus d'un siècle.</li>
+            </ul>
+
+            <blockquote>
+              <p><strong>Subventions du patrimoine :</strong> Dans certaines communes protégées de l'Isère, le Conseil Départemental ou les fondations pour le patrimoine subventionnent les projets de restauration à hauteur de 20% à 40% des travaux de couverture en lauzes.</p>
+            </blockquote>
+          </div>
+        </article>
+
+        <!-- Right: StepsForm -->
+        <aside style="display: flex; flex-direction: column; gap: 30px;">
+          <div>
+            <StepsForm />
+          </div>
+
+          <div style="background: white; border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); border-radius: var(--radius-sm); padding: 25px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Dossiers Pratiques</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; padding: 0;">
+              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold;">📊 Grille de Tarifs 2026</a></li>
+              <li><a href="/guide-toiture-montagne/" style="color: var(--text); font-weight: bold;">❄️ Normes Neige &amp; Altitude</a></li>
+              <li><a href="/communes/" style="color: var(--text); font-weight: bold;">🗺️ Annuaire Communes (38)</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .rich-content h2 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary);
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+  }
+  .rich-content p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .rich-content ul {
+    margin-bottom: 20px;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rich-content li {
+    line-height: 1.6;
+  }
+  .rich-content blockquote {
+    margin: 25px 0;
+    padding: 15px 20px;
+    background-color: var(--primary-light);
+    border-left: 4px solid var(--secondary);
+    border-radius: 4px;
+    font-style: italic;
+  }
+</style>

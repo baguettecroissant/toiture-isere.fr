@@ -1,0 +1,156 @@
+---
+import config from '../data/config.json';
+
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  pageUrl: string;
+  pageTitle: string;
+  pageDescription: string;
+  faqItems?: FAQItem[];
+  breadcrumbItems?: BreadcrumbItem[];
+  communeName?: string;
+  communeData?: any;
+}
+
+const { pageUrl, pageTitle, pageDescription, faqItems, breadcrumbItems, communeName, communeData } = Astro.props;
+
+const siteUrl = `https://${config.domain}`;
+const BUILD_DATE = new Date().toISOString().split('T')[0];
+
+// ── WebSite schema — enables Google Sitelinks search box
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": config.brandName,
+  "url": siteUrl,
+  "description": `Service de mise en relation avec des artisans couvreurs alpins certifiés RGE dans le département de l'${config.department} (${config.departmentCode}).`,
+  "inLanguage": "fr-FR",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${siteUrl}/communes/?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// ── Organization schema — E-E-A-T signal
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": config.brandName,
+  "url": siteUrl,
+  "logo": `${siteUrl}/favicon.svg`,
+  "description": `Plateforme indépendante de mise en relation avec des couvreurs RGE qualifiés et spécialisés en montagne dans l'${config.department} (${config.departmentCode}).`,
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": `Département de l'${config.department}`,
+    "identifier": `FR-${config.departmentCode}`
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": config.mainCity,
+    "addressRegion": "Auvergne-Rhône-Alpes",
+    "postalCode": `${config.departmentCode}000`,
+    "addressCountry": "FR"
+  },
+  "sameAs": [
+    `https://www.google.com/maps/search/couvreur+${config.mainCity}`
+  ]
+};
+
+// ── LocalBusiness schema — per page, optionally geo-scoped
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": config.brandName,
+  "description": pageDescription,
+  "url": siteUrl,
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": `${config.department} (${config.departmentCode})`
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": communeName || config.mainCity,
+    "addressRegion": "Auvergne-Rhône-Alpes",
+    "addressCountry": "FR",
+    ...(communeData?.codePostal && { "postalCode": communeData.codePostal })
+  },
+  "priceRange": "€€",
+  ...(communeName && {
+    "serviceArea": {
+      "@type": "City",
+      "name": communeName,
+      ...(communeData?.latitude && communeData?.longitude && {
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": communeData.latitude,
+          "longitude": communeData.longitude
+        }
+      })
+    }
+  })
+};
+
+// ── FAQ schema
+const faqSchema = faqItems && faqItems.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+} : null;
+
+// ── BreadcrumbList schema
+const breadcrumbSchema = breadcrumbItems && breadcrumbItems.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.label,
+    ...(item.href && { "item": `${siteUrl}${item.href}` })
+  }))
+} : null;
+
+// ── WebPage schema
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": pageTitle,
+  "description": pageDescription,
+  "url": pageUrl,
+  "inLanguage": "fr-FR",
+  "datePublished": "2026-06-01",
+  "dateModified": BUILD_DATE,
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": config.brandName,
+    "url": siteUrl
+  },
+  "breadcrumb": breadcrumbSchema || undefined
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+{faqSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{breadcrumbSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}

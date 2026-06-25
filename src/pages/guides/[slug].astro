@@ -1,0 +1,183 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import StepsForm from '../../components/StepsForm.astro';
+import SchemaMarkup from '../../components/SchemaMarkup.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('guides');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const title = `${post.data.title} | Expert Couvreur Isère`;
+const description = post.data.description;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides", href: "/guides/" },
+  { label: post.data.title }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={[
+      { label: "Accueil", href: "/" },
+      { label: "Guides", href: "/guides/" },
+      { label: post.data.title }
+    ]}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div class="two-column-layout" style="align-items: start; gap: 40px;">
+        
+        <!-- Main Content -->
+        <article style="display: flex; flex-direction: column; gap: 30px; font-size: 16.5px; line-height: 1.8; color: var(--text);">
+          <header style="display: flex; flex-direction: column; gap: 15px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; color: var(--secondary); font-weight: 700;">
+              📅 Publié le {new Date(post.data.publishDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} par {post.data.author}
+            </span>
+            <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin: 0; line-height: 1.25;">
+              {post.data.title}
+            </h1>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; font-style: italic; margin: 0; padding-left: 15px; border-left: 4px solid var(--secondary);">
+              {post.data.description}
+            </p>
+          </header>
+
+          {post.data.image && (
+            <div style="border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm);">
+              <img 
+                src={post.data.image} 
+                alt={post.data.title} 
+                style="width: 100%; height: 380px; object-fit: cover;" 
+              />
+            </div>
+          )}
+
+          <div class="rich-content">
+            <Content />
+          </div>
+
+          <div style="margin-top: 40px; padding: 30px; background-color: var(--primary-light); border: 2px solid var(--border-color); border-radius: var(--radius-md); text-align: center;">
+            <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 22px; font-weight: 800; margin-bottom: 12px;">
+              Besoin d'un couvreur professionnel en Isère ?
+            </h3>
+            <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6;">
+              Obtenez des devis personnalisés sous 48h de la part d'artisans locaux qualifiés RGE et proches de chez vous.
+            </p>
+            <a href="/devis/" class="contact-btn" style="background: var(--secondary); color: white !important; font-weight: 800; font-size: 16px; padding: 14px 28px;">
+              Demander mes Devis Gratuits
+            </a>
+          </div>
+        </article>
+
+        <!-- Sidebar -->
+        <aside style="display: flex; flex-direction: column; gap: 30px;">
+          <div>
+            <StepsForm />
+          </div>
+
+          <div style="background: white; border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); border-radius: var(--radius-sm); padding: 25px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Dossiers Pratiques</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; padding: 0;">
+              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold;">📊 Grille de Tarifs 2026</a></li>
+              <li><a href="/guide-toiture-montagne/" style="color: var(--text); font-weight: bold;">❄️ Normes Charge Neige &amp; Altitude</a></li>
+              <li><a href="/lauze-traditionnelle/" style="color: var(--text); font-weight: bold;">🪨 Lauze Calcaire Dauphinoise</a></li>
+              <li><a href="/communes/" style="color: var(--text); font-weight: bold;">🗺️ Annuaire Communes (38)</a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  /* Markdown content styling */
+  .rich-content h2 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary);
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+  }
+  .rich-content h3 {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-top: 30px;
+    margin-bottom: 12px;
+  }
+  .rich-content p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .rich-content ul, .rich-content ol {
+    margin-bottom: 20px;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rich-content li {
+    line-height: 1.6;
+  }
+  .rich-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 14.5px;
+  }
+  .rich-content th, .rich-content td {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+  }
+  .rich-content th {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: bold;
+  }
+  .rich-content tr:nth-child(even) td {
+    background-color: rgba(20, 83, 45, 0.03);
+  }
+  .rich-content strong {
+    color: var(--primary);
+  }
+  .rich-content blockquote {
+    margin: 25px 0;
+    padding: 15px 20px;
+    background-color: var(--primary-light);
+    border-left: 4px solid var(--secondary);
+    border-radius: 4px;
+    font-style: italic;
+  }
+  
+  aside a {
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  aside a:hover {
+    color: var(--accent-hover) !important;
+  }
+</style>

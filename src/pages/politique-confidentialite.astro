@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import config from '../data/config.json';
+
+const title = "Politique de Confidentialité & RGPD | Toiture Isère";
+const description = "Politique de traitement et de protection des données personnelles collectées sur toiture-isere.fr.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Politique de Confidentialité" }
+];
+---
+
+<Layout title={title} description={description} robots="noindex, nofollow">
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container" style="max-width: 800px; color: var(--text); line-height: 1.8;">
+      <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: var(--primary); margin-bottom: 25px;">
+        Politique de Confidentialité (RGPD)
+      </h1>
+
+      <div style="display: flex; flex-direction: column; gap: 25px; font-size: 15px;">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">1. Données collectées</h2>
+          <p>
+            Lorsque vous soumettez une demande d'estimation de devis sur notre site, nous collectons les données personnelles suivantes :
+          </p>
+          <ul>
+            <li>Nom et Prénom</li>
+            <li>Adresse e-mail</li>
+            <li>Numéro de téléphone (fixe ou mobile)</li>
+            <li>Adresse postale complète du chantier</li>
+            <li>Caractéristiques déclarées de votre toiture (surface, matériaux)</li>
+            <li>Adresse IP et chaîne User-Agent de votre navigateur</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">2. Finalité du traitement</h2>
+          <p>
+            Ces données sont collectées et traitées uniquement dans le but de :
+          </p>
+          <ul>
+            <li>Enregistrer votre demande dans notre base de données sécurisée (hébergée via Supabase) à des fins de traçabilité.</li>
+            <li>Transmettre vos besoins à la plateforme partenaire <strong>ViteUnDevis</strong> pour vous mettre en relation avec 1 à 3 artisans couvreurs du 38 qualifiés.</li>
+            <li>Permettre la validation technique et téléphonique de votre dossier par un téléconseiller agréé.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">3. Transmission des données</h2>
+          <p>
+            Vos coordonnées de contact ne sont transmises qu'à notre plateforme partenaire <strong>ViteUnDevis</strong>. 
+            Aucune revente, partage ou location de vos données personnelles n'est effectuée auprès d'autres tiers ou régies publicitaires externes sans votre accord préalable explicite.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">4. Durée de conservation</h2>
+          <p>
+            Les données personnelles des prospects collectées via le formulaire sont conservées en base Supabase pour une durée maximale de 36 mois à compter de la date de soumission du projet, conformément aux recommandations de la CNIL.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">5. Vos droits (Accès, Rectification, Suppression)</h2>
+          <p>
+            Conformément à la réglementation européenne sur la protection des données (RGPD - Règlement UE 2016/679) et à la loi française "Informatique et Libertés", vous disposez d'un droit d'accès, de rectification, de portabilité et de suppression de l'ensemble de vos données stockées sur nos serveurs.
+          </p>
+          <p>
+            Pour exercer ce droit de suppression ou de rectification de vos données, envoyez-nous simplement un courriel à l'adresse suivante : <strong>contact@baguettecroissant.com</strong>. Nous traiterons votre demande sous 48h ouvrées.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

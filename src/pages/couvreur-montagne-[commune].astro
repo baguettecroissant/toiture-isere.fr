@@ -1,0 +1,271 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+import communes from '../data/communes.json';
+import { generateCommuneContent, getDynamicPrices } from '../lib/contentEngine';
+import { getSmartNearbyCommunes } from '../lib/geoLinks';
+
+export async function getStaticPaths() {
+  return communes.map((c) => ({
+    params: { commune: c.slug },
+    props: { commune: c },
+  }));
+}
+
+const { commune } = Astro.props;
+const pageType = 'artisan';
+const local = generateCommuneContent(commune, pageType);
+const prices = getDynamicPrices(commune);
+const nearby = getSmartNearbyCommunes(commune.slug, communes, 6, 2);
+
+const title = local.title;
+const description = local.introParagraph.substring(0, 160);
+const rge = commune.marketData?.couvreursRGE || 3;
+const delay = commune.marketData?.delaiMoyenJours || 10;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Villes Isère (38)", href: "/communes/" },
+  { label: `Artisan Couvreur à ${commune.nom}` }
+];
+
+// Checklist of consumer verifications before hiring a roofer
+const verificationItems = [
+  { icon: "🛡️", label: "Garantie Décennale Obligatoire (art. 1792 Code civil)", detail: "Exigez l'attestation nominative d'assurance décennale signée par l'assureur pour l'année en cours. Elle couvre les désordres compromettant la solidité de la toiture pendant 10 ans." },
+  { icon: "🏅", label: "Certification RGE Qualibat ou Capeb active", detail: "La mention RGE (Reconnu Garant de l'Environnement) est indispensable pour être éligible aux aides MaPrimeRénov' et aux primes CEE sur vos travaux d'isolation (sarking)." },
+  { icon: "📋", label: "Devis détaillé sur papier en-tête", detail: "Le document doit lister : surface m², descriptif technique, marque des matériaux (ardoises, isolants), garanties appliquées, dates d'intervention et modalités de règlement." },
+  { icon: "💰", label: "Acompte raisonnable (max. 30%)", detail: "Un artisan sérieux demande en général 20% à 30% d'acompte à la signature. Refusez de payer l'intégralité du chantier ou des acomptes excessifs avant le démarrage effectif." },
+  { icon: "📱", label: "Avis vérifiés & Références locales en Isère", detail: "Demandez des adresses de chantiers récents réalisés dans le 38. Vérifiez la réputation en ligne sur Google ou PagesJaunes. Évitez le démarchage à domicile suspect." },
+  { icon: "⏱️", label: "Droit de rétractation de 14 jours", detail: "En cas de démarchage à domicile ou de signature hors-établissement, vous bénéficiez légalement de 14 jours pour vous rétracter sans frais (art. L. 221-18 du Code de la Consommation)." }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    faqItems={local.faqItems}
+    breadcrumbItems={[
+      { label: "Accueil", href: "/" },
+      { label: "Villes Isère", href: "/communes/" },
+      { label: `Artisan Couvreur à ${commune.nom}` }
+    ]}
+    communeName={commune.nom}
+    communeData={commune}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <!-- ═══ HERO SECTION ═══ -->
+  <section style="background: linear-gradient(135deg, rgba(20,83,45,0.06) 0%, rgba(3,105,161,0.03) 100%); padding: 55px 0; border-bottom: 2px solid var(--border-color); position: relative;">
+    <div class="container">
+      <div class="two-column-layout">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="badge-pill" style="width: max-content; margin-bottom: 18px;">
+            👤 Couvreurs alpins RGE — {commune.nom} ({commune.codePostal})
+          </div>
+          <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); line-height: 1.25; margin-bottom: 18px;">
+            Trouver un Artisan Couvreur Certifié à <span style="color: var(--secondary);">{commune.nom}</span> ({commune.codePostal})
+          </h1>
+          <p style="font-size: 16.5px; line-height: 1.75; color: var(--text); margin-bottom: 22px;">
+            {local.introParagraph}
+          </p>
+
+          <!-- Info RGE -->
+          <div style="background: white; border: 1.5px solid var(--border-color); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: var(--radius-sm); margin-bottom: 22px;">
+            <div style="font-weight: 800; color: var(--primary); margin-bottom: 6px; font-size: 14px;">💡 Pourquoi choisir un couvreur qualifié RGE à {commune.nom} ?</div>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin: 0; line-height: 1.7;">
+              La qualification RGE (Reconnu Garant de l'Environnement) atteste des compétences de l'artisan pour réaliser des travaux d'économie d'énergie. Elle est légalement requise en Isère pour débloquer les aides financières de l'ANAH (MaPrimeRénov') et bénéficier de la TVA réduite sur l'isolation thermique.
+            </p>
+          </div>
+
+          <!-- Conseil local -->
+          {local.conseilLocal && (
+            <div style="background: #F0FDF4; border: 1.5px solid var(--border-color); border-left: 4px solid var(--secondary); padding: 16px 20px; border-radius: var(--radius-sm); margin-bottom: 22px;">
+              <div style="font-weight: 800; color: var(--secondary); margin-bottom: 6px; font-size: 14px;">📌 Conseil Local — {commune.nom} :</div>
+              <p style="font-size: 13.5px; color: var(--text-muted); margin: 0; line-height: 1.6;">{local.conseilLocal}</p>
+            </div>
+          )}
+
+          <!-- KPIs marché local -->
+          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <div style="background: white; border: 1.5px solid var(--border-color); padding: 12px 18px; border-radius: var(--radius-sm); text-align: center; flex: 1; min-width: 100px;">
+              <div style="font-size: 24px; font-weight: 900; color: var(--primary);">{rge}</div>
+              <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Couvreurs RGE</div>
+            </div>
+            <div style="background: white; border: 1.5px solid var(--border-color); padding: 12px 18px; border-radius: var(--radius-sm); text-align: center; flex: 1; min-width: 100px;">
+              <div style="font-size: 24px; font-weight: 900; color: var(--primary);">{delay}j</div>
+              <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Délai d'intervention</div>
+            </div>
+            <div style="background: white; border: 1.5px solid var(--border-color); padding: 12px 18px; border-radius: var(--radius-sm); text-align: center; flex: 1; min-width: 100px;">
+              <div style="font-size: 24px; font-weight: 900; color: var(--primary);">10 ans</div>
+              <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Garantie Décennale</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Form -->
+        <div>
+          <StepsForm initialZip={commune.codePostal} initialCommune={commune.nom} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUALIFICATIONS A VERIFIER ═══ -->
+  <section style="padding: 70px 0; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
+          Garanties &amp; Sécurité : Choisir un artisan en Isère
+        </h2>
+        <p style="font-size: 15.5px; color: var(--text-muted);">
+          Dans l'Isère, {rge} couvreurs RGE déclarés interviennent sur votre secteur. Voici comment sécuriser vos travaux.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div style="font-size: 28px; margin-bottom: 12px;">🛡️</div>
+          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Assurance Décennale Toiture</h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
+            {local.climateContext}
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 28px; margin-bottom: 12px;">🏆</div>
+          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Label RGE &amp; Aides Régionales</h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
+            {local.abfRegulations}
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 28px; margin-bottom: 12px;">🏠</div>
+          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Expertise Bâti Alpin (38)</h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin: 0;">
+            {local.housingTypologyInsight}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CHECKLIST CONSOMMATEUR ═══ -->
+  <section style="padding: 70px 0; background: linear-gradient(180deg, #F0FDF4 0%, #fff 100%); border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 900px;">
+      <div style="text-align: center; margin-bottom: 45px;">
+        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 14px;">
+          Checklist : 6 Points à Vérifier Avant de Signer
+        </h2>
+        <p style="font-size: 15.5px; color: var(--text-muted);">
+          Protégez-vous contre les arnaques et garantissez la bonne réalisation de votre chantier à {commune.nom}.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        {verificationItems.map((item) => (
+          <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); padding: 22px; display: flex; gap: 16px; align-items: flex-start; box-shadow: var(--shadow-sm);">
+            <span style="font-size: 26px; flex-shrink: 0;">{item.icon}</span>
+            <div>
+              <h4 style="font-family: var(--font-heading); color: var(--primary); font-size: 16px; font-weight: 800; margin-bottom: 6px;">✅ {item.label}</h4>
+              <p style="font-size: 13.5px; color: var(--text-muted); margin: 0; line-height: 1.7;">{item.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INDICATEURS MARCHÉ ═══ -->
+  <section style="padding: 70px 0; background-color: var(--card-bg); border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 900px;">
+      <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); text-align: center; margin-bottom: 45px;">
+        Marché de la Couverture à {commune.nom} — Données 2026
+      </h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; margin-bottom: 40px;">
+        <div style="background: white; border: 1.5px solid var(--border-color); padding: 28px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="font-size: 36px; margin-bottom: 10px;">🏢</div>
+          <div style="font-size: 40px; font-weight: 900; color: var(--primary); font-family: var(--font-heading);">{rge}</div>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 700; margin-top: 8px;">Couvreurs RGE actifs dans le secteur de {commune.nom}</p>
+        </div>
+        
+        <div style="background: white; border: 1.5px solid var(--border-color); padding: 28px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="font-size: 36px; margin-bottom: 10px;">⏱️</div>
+          <div style="font-size: 40px; font-weight: 900; color: var(--primary); font-family: var(--font-heading);">{delay} jours</div>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 700; margin-top: 8px;">Délai d'intervention estimé dans l'Isère</p>
+        </div>
+        
+        <div style="background: white; border: 1.5px solid var(--border-color); padding: 28px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="font-size: 36px; margin-bottom: 10px;">🛡️</div>
+          <div style="font-size: 40px; font-weight: 900; color: var(--primary); font-family: var(--font-heading);">100%</div>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 700; margin-top: 8px;">Garantie décennale exigée de nos partenaires</p>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="#devis" class="btn-primary" style="display: inline-block;">📋 Demander mes devis gratuits pour {commune.nom} &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section style="padding: 70px 0; background-color: var(--bg); border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 860px;">
+      <div style="text-align: center; margin-bottom: 45px;">
+        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 900; color: var(--primary); margin-bottom: 10px;">
+          FAQ Couvreur RGE — {commune.nom} (38)
+        </h2>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        {local.faqItems.map((item) => (
+          <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); padding: 24px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px;">
+              <span style="background: var(--primary); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">Q</span>
+              {item.q}
+            </h3>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.75; margin: 0; padding-left: 36px;">
+              {item.a}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LIENS DE PROXIMITE ═══ -->
+  <section style="padding: 70px 0; background-color: var(--card-bg); border-top: 1.5px solid var(--border-color);">
+    <div class="container">
+      <h2 style="font-family: var(--font-heading); font-size: 26px; font-weight: 900; color: var(--primary); text-align: center; margin-bottom: 35px;">
+        Rechercher un couvreur certifié dans les secteurs proches de {commune.nom}
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px;">
+        {nearby.map((c) => (
+          <a
+            href={`/couvreur-montagne-${c.slug}/`}
+            style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); padding: 15px; display: block; text-decoration: none; text-align: center; transition: var(--transition); font-weight: 700; color: var(--primary);"
+            class="proximity-link"
+          >
+            👤 Couvreur RGE {c.nom} ({c.codePostal})
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .proximity-link:hover {
+    border-color: var(--secondary);
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+</style>

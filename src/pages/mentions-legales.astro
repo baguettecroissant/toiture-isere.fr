@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import config from '../data/config.json';
+
+const title = "Mentions Légales | Toiture Isère";
+const description = "Mentions légales du site d'information indépendant et de devis de toiture toiture-isere.fr.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Mentions Légales" }
+];
+---
+
+<Layout title={title} description={description} robots="noindex, nofollow">
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container" style="max-width: 800px; color: var(--text); line-height: 1.8;">
+      <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: var(--primary); margin-bottom: 25px;">
+        Mentions Légales
+      </h1>
+
+      <div style="display: flex; flex-direction: column; gap: 25px; font-size: 15px;">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">1. Éditeur du site</h2>
+          <p>
+            Le site internet <strong>toiture-isere.fr</strong> est un service d'information et de mise en relation indépendant édité par <strong>Baguette Croissant</strong>.
+          </p>
+          <p>
+            Pour toute demande d'information ou de réclamation, vous pouvez contacter l'éditeur à l'adresse e-mail suivante : contact@baguettecroissant.com.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">2. Hébergement du site</h2>
+          <p>
+            Ce site est hébergé par la société <strong>Cloudflare Inc.</strong>, dont le siège social est situé à 101 Townsend St, San Francisco, CA 94107, USA.
+          </p>
+          <p>
+            Téléphone : +1 (650) 319 8930 — Site web : <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer">www.cloudflare.com</a>.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">3. Service de mise en relation</h2>
+          <p>
+            <strong>toiture-isere.fr</strong> est une plateforme de génération de leads de type "Rank & Rent" à vocation commerciale de mise en relation. 
+            L'éditeur transmet les demandes de devis d'utilisateurs collectées via le formulaire du site à la plateforme partenaire <strong>ViteUnDevis</strong> (SAS, SIRET 52835940600028) et enregistre les données dans la base sécurisée de la plateforme.
+          </p>
+          <p>
+            L'éditeur n'exerce aucune activité d'artisan couvreur ou de maître d'œuvre et n'intervient pas dans les relations contractuelles ultérieures entre l'utilisateur et les entreprises sélectionnées pour le devis.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">4. Propriété intellectuelle</h2>
+          <p>
+            L'ensemble des contenus (textes, spintax dynamiques, logos, structures de pages) de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Toute reproduction, distribution ou diffusion de ces contenus sans autorisation écrite préalable est formellement interdite.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

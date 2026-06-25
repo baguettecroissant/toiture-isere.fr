@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+
+const title = "Prix Toiture en Isère (38) — Grille Tarifaire 2026";
+const description = "Retrouvez les prix moyens constatés au m² pour vos travaux de couverture, de charpente renforcée et d'isolation de toiture en Isère en 2026.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Tarifs Toiture Isère 2026" }
+];
+
+const priceList = [
+  { category: "Rénovation & Couverture", item: "Réfection tuiles béton montagne (certifiées antigel)", price: "90 – 145 € / m²", unit: "pose comprise" },
+  { category: "Rénovation & Couverture", item: "Réfection ardoise naturelle (crochets inox)", price: "130 – 200 € / m²", unit: "pose comprise" },
+  { category: "Rénovation & Couverture", item: "Restauration toiture en lauze calcaire", price: "200 – 350 € / m²", unit: "pose comprise" },
+  { category: "Entretien & Nettoyage", item: "Démoussage + traitement hydrofuge antigel", price: "15 – 35 € / m²", unit: "nettoyage + produit" },
+  { category: "Charpente & Structure", item: "Charpente renforcée montagne (Eurocode 5)", price: "80 – 150 € / m²", unit: "bois massif de pays" },
+  { category: "Isolation Thermique", item: "Isolation sarking continue haute performance (R=5+)", price: "100 – 180 € / m²", unit: "panneaux fibre de bois" },
+  { category: "Éléments de Sécurité", item: "Arrêts de neige (crochets anti-avalanche)", price: "25 – 45 € / ml", unit: "acier galva ou inox" },
+  { category: "Zinguerie & Évacuation", item: "Zinguerie zinc naturel (descentes calibre neige)", price: "50 – 95 € / ml", unit: "pose comprise" },
+  { category: "Ouvertures", item: "Fenêtre de toit Velux d'altitude double vitrage", price: "900 – 2 000 € / u", unit: "pose comprise" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container" style="max-width: 950px;">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">📊 Transparence des Prix</span>
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">
+          Grille de Tarifs Toiture &amp; Couverture en Isère
+        </h1>
+        <p style="font-size: 16.5px; color: var(--text-muted); line-height: 1.6; max-width: 800px; margin: 0 auto;">
+          Les coûts de couverture en Isère dépendent fortement de l'altitude, de la pente du toit et des contraintes neige. Voici notre grille de référence 2026.
+        </p>
+      </div>
+
+      <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 50px;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 15px;">
+          <thead>
+            <tr style="background: var(--primary); color: white;">
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Catégorie</th>
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Prestation</th>
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Tarif Moyen 2026</th>
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Conditions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {priceList.map((p, index) => (
+              <tr style={`border-bottom: 1px solid var(--border-color); ${index % 2 === 1 ? 'background-color: var(--primary-light);' : ''}`}>
+                <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">{p.category}</td>
+                <td style="padding: 15px 20px; color: var(--text);">{p.item}</td>
+                <td style="padding: 15px 20px;"><span class="price-tag">{p.price}</span></td>
+                <td style="padding: 15px 20px; color: var(--text-muted); font-size: 13.5px;">{p.unit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Two column block form & help -->
+      <div class="two-column-layout" style="gap: 40px; align-items: start;">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 24px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">
+            Pourquoi les prix diffèrent entre plaine et altitude en Isère ?
+          </h2>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 15px;">
+            1. <strong>La charge de neige (normes C2) :</strong> Les chantiers au-dessus de 500 mètres exigent un dimensionnement de charpente plus lourd et des sections de bois augmentées.
+          </p>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 15px;">
+            2. <strong>Les matériaux de couverture :</strong> L'ardoise naturelle d'Espagne ou d'Angers et la lauze calcaire montagnarde coûtent plus cher à l'achat et à la pose que la tuile mécanique standard.
+          </p>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 15px;">
+            3. <strong>La saisonnalité stricte :</strong> En altitude, la saison de pose est réduite aux mois sans neige (de mai à octobre), ce qui concentre les demandes et peut influer sur le coût de la main d'œuvre.
+          </p>
+        </div>
+
+        <div>
+          <StepsForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

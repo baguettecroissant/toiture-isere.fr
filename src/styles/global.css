@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Header */
-header {
+.site-header {
   background: rgba(240, 253, 244, 0.95); /* Mint light */
   backdrop-filter: blur(8px);
   border-bottom: 2px solid var(--border-color);

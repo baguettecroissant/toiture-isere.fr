@@ -7,6 +7,7 @@ export default defineConfig({
   integrations: [sitemap()],
   output: 'static',
   adapter: cloudflare({
-    imageService: 'passthrough'
+    imageService: 'passthrough',
+    prerenderEnvironment: 'node'
   })
 });
